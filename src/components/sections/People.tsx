@@ -10,17 +10,14 @@ const people = [
   {
     name: "Dr. Rajesh Mehta",
     role: "MBBS, MD - former Dean, GMERS Medical College, Sola, Ahmedabad",
-    source: "As signed on the Bright Vision Detector introduction; also the contact for the Health Assurance Mission.",
   },
   {
     name: "Hema Mehta",
     role: "MPH, DNHE, CIN - concept of the “Nutrition A” educational CD",
-    source: "As printed on the CD cover (developed by Human Health Circle & Finavia, Ahmedabad).",
   },
   {
     name: "Vaidya Dr. Shivaniben Patel",
     role: "Ayurveda practitioner (MD Ayu.) - presents the Ayurvedic daily-routine video",
-    source: "Named in HHC’s December 2022 camp poster and its YouTube video.",
   },
 ];
 
@@ -35,7 +32,6 @@ export function People() {
           <StaggerItem as="li" key={p.name} className="bg-white p-8">
             <h3 className="text-2xl"><T>{p.name}</T></h3>
             <p className="mt-3 font-medium text-deep"><T>{p.role}</T></p>
-            <p className="mt-4 border-t border-line pt-4 text-sm text-muted"><T>Source:</T> <T>{p.source}</T></p>
           </StaggerItem>
         ))}
       </StaggerContainer>

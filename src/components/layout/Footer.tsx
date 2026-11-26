@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, Phone } from "lucide-react";
 import { Logo } from "./Logo";
 import { T } from "@/components/i18n/T";
 import { footerLinks, site } from "@/content/site";
@@ -39,17 +39,13 @@ export function Footer() {
             <p className="mt-5 max-w-md text-[0.95rem] leading-relaxed"><T>{site.description}</T></p>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              <a href={`tel:${site.phone.tel}`} className="inline-flex h-11 items-center gap-2 rounded-full bg-white px-4 text-[0.95rem] font-semibold text-forest transition-colors duration-150 hover:bg-sage-light">
-                <Phone className="size-4" aria-hidden /> {site.phone.display}
+              <a href={`tel:${site.phone.tel}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 text-[0.95rem] font-semibold text-forest transition-colors duration-150 hover:bg-sage-light">
+                <Phone className="size-4 shrink-0" aria-hidden /> {site.phone.display}
               </a>
-              <a href={`mailto:${site.email}`} className="inline-flex h-11 items-center gap-2 rounded-full border border-white/25 px-4 text-[0.95rem] font-medium text-white transition-colors duration-150 hover:bg-white/10">
-                <Mail className="size-4" aria-hidden /> <span className="break-all">{site.email}</span>
+              <a href={`mailto:${site.email}`} className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-white/25 px-3.5 py-2 text-[0.8125rem] font-medium text-white transition-colors duration-150 hover:bg-white/10 sm:px-4 sm:text-[0.95rem]">
+                <Mail className="size-4 shrink-0" aria-hidden /> <span className="break-words">{site.email}</span>
               </a>
             </div>
-            <p className="mt-4 flex items-start gap-2 text-[0.95rem]">
-              <MapPin className="mt-1 size-4 shrink-0 text-white/60" aria-hidden />
-              <span><T>Ahmedabad · Dehgam · Vadodara · Anand, Gujarat</T> — <Link className="underline underline-offset-2 hover:text-white" href="/centres"><T>see centres</T></Link></span>
-            </p>
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
