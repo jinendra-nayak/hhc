@@ -8,7 +8,7 @@ export function Intro() {
       <div className="grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:gap-20">
         <div>
           <p className="eyebrow mb-4"><T>Who we are</T></p>
-          <h2 id="intro-title" className="text-3xl sm:text-4xl lg:text-[2.7rem]"><T>A circle of people working for everyone’s health.</T></h2>
+          <h2 id="intro-title" className="text-3xl sm:text-4xl lg:text-[2.7rem]"><T>A community working together for everyone’s health.</T></h2>
         </div>
         <FadeIn className="space-y-5 text-lg text-muted">
           <p className="font-heading text-2xl leading-snug text-forest">

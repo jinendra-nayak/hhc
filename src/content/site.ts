@@ -68,7 +68,7 @@ export const nav: NavGroup[] = [
       { label: "E-books", href: "/e-books", description: "First aid & herbal guides" },
       { label: "Health Awareness Videos", href: "/health-awareness-videos", description: "Gujarati videos on YouTube" },
       { label: "Products", href: "/products", description: "Product catalogue (PDF)" },
-      { label: "Blog", href: "/blog", description: "Updates and archive" },
+      { label: "Blog", href: "/blog", description: "News, updates and archive" },
     ],
   },
   { label: "Contact", href: "/contact" },
@@ -225,16 +225,6 @@ export const centres: readonly { id: string; city: string; locations: readonly C
         links: [],
       },
     ],
-  },
-  {
-    id: "vadodara",
-    city: "Vadodara",
-    locations: [{ name: "Vadodara centre", address: null, source: "Listed on the previous HHC website. Address awaiting HHC.", links: [] }],
-  },
-  {
-    id: "anand",
-    city: "Anand",
-    locations: [{ name: "Anand centre", address: null, source: "Listed on the previous HHC website. Address awaiting HHC.", links: [] }],
   },
 ];
 

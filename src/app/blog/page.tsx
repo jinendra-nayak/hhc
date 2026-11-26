@@ -14,7 +14,7 @@ export const metadata = buildMetadata({
 export default function BlogPage() {
   return (
     <>
-      <PageHero eyebrow={<T>Resources</T>} title={<T>Blog.</T>} lead={<T>Updates and archive. New articles will be added as HHC publishes them.</T>} crumbs={[{ label: <T>Blog</T> }]} />
+      <PageHero eyebrow={<T>Resources</T>} title={<T>Blog.</T>} lead={<T>News, updates and archive. New articles will be added as HHC publishes them.</T>} crumbs={[{ label: <T>Blog</T> }]} />
       <Section tone="cream">
         <ul className="divide-y divide-line border-y border-line">
           {posts.map((p) => (

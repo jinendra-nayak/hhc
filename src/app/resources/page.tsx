@@ -17,7 +17,7 @@ const items = [
   { href: "/e-books", t: "E-books", d: "First Aid and Dodi (Jivanti)." },
   { href: "/nutrition-calculator", t: "Nutrition calculator", d: "Nutrition Advance: look up nutrients and analyse a diet." },
   { href: "/products", t: "Products", d: "Food products and Ayurveda medicines catalogue." },
-  { href: "/blog", t: "Blog", d: "Updates and archive." },
+  { href: "/blog", t: "Blog", d: "News, updates and archive." },
 ];
 
 export default function ResourcesPage() {

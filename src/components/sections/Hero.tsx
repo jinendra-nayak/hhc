@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { images } from "@/content/images";
 
 const quick = [
-  { href: "/centres", label: "Find a centre", sub: "Ahmedabad · Dehgam · Vadodara · Anand", Icon: MapPin },
+  { href: "/centres", label: "Find a centre", sub: "Ahmedabad · Dehgam", Icon: MapPin },
   { href: "/health-awareness-videos", label: "Watch health videos", sub: "Six talks on YouTube", Icon: PlayCircle },
   { href: "/e-books", label: "Download free guides", sub: "First aid, lifestyle and more (PDF)", Icon: Download },
 ];
@@ -42,7 +42,6 @@ export function Hero() {
           <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-7">
             <Button asChild size="lg" variant="white"><Link href="/about-us"><T>Learn about us</T> <ArrowRight aria-hidden /></Link></Button>
             <Button asChild size="lg" variant="outline-light"><Link href="/initiatives"><T>Our initiatives</T></Link></Button>
-            <Link href="/contact" className="link-sweep px-2 py-3 font-semibold text-white"><T>Contact us</T></Link>
           </div>
         </div>
 

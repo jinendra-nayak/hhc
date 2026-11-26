@@ -12,7 +12,7 @@ export function ResourcesPreview() {
     <>
       <Section tone="cream" labelledBy="learn-title">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading id="learn-title" eyebrow={<T>Health education</T>} title={<T>Watch and learn.</T>} />
+          <SectionHeading id="learn-title" eyebrow={<T>Health education</T>} title={<T>Watch, learn and stay informed.</T>} />
           <Link href="/health-awareness-videos" className="link-sweep inline-flex items-center gap-1.5 font-semibold text-deep hover:text-forest">
             <T>All videos</T> <ArrowRight className="size-4" aria-hidden />
           </Link>
@@ -48,7 +48,7 @@ export function ResourcesPreview() {
 
       <Section tone="sage" labelledBy="articles-title">
         <div className="flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading id="articles-title" eyebrow={<T>Latest from the blog</T>} title={<T>Updates and archive.</T>} />
+          <SectionHeading id="articles-title" eyebrow={<T>Latest from the blog</T>} title={<T>News, updates and archive.</T>} />
           <Link href="/blog" className="link-sweep inline-flex items-center gap-1.5 font-semibold text-deep hover:text-forest"><T>All posts</T> <ArrowRight className="size-4" aria-hidden /></Link>
         </div>
         <ul className="mt-12 grid gap-4 md:grid-cols-3">

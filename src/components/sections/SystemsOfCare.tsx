@@ -24,7 +24,7 @@ export function SystemsOfCare() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-sm text-muted"><T>Which centre offers which service is being confirmed with HHC - please call before travelling.</T></p>
+            <p className="mt-5 text-sm text-muted"><T>Please contact HHC to confirm which services are available at each centre.</T></p>
           </FadeIn>
         </div>
       </div>

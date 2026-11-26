@@ -23,7 +23,7 @@ export default function ContactPage() {
             <ul className="mt-6 space-y-5 text-lg">
               <li className="flex gap-4"><Phone className="mt-1.5 size-5 shrink-0 text-brand-brown" aria-hidden /><div><p className="text-sm text-muted"><T>Phone / WhatsApp</T></p><a className="font-semibold text-forest" href={`tel:${site.phone.tel}`}>{site.phone.display}</a></div></li>
               <li className="flex gap-4"><Mail className="mt-1.5 size-5 shrink-0 text-brand-brown" aria-hidden /><div><p className="text-sm text-muted"><T>Email</T></p><a className="break-all font-semibold text-forest" href={`mailto:${site.email}`}>{site.email}</a></div></li>
-              <li className="flex gap-4"><MapPin className="mt-1.5 size-5 shrink-0 text-brand-brown" aria-hidden /><div><p className="text-sm text-muted"><T>Centres</T></p><p className="text-forest"><T>Ahmedabad, Dehgam, Vadodara, Anand</T> - <a className="underline" href="/centres"><T>addresses</T></a></p></div></li>
+              <li className="flex gap-4"><MapPin className="mt-1.5 size-5 shrink-0 text-brand-brown" aria-hidden /><div><p className="text-sm text-muted"><T>Centres</T></p><p className="text-forest"><T>Ahmedabad, Dehgam</T> - <a className="underline" href="/centres"><T>addresses</T></a></p></div></li>
             </ul>
           </div>
           <div className="rounded-3xl border border-line bg-white p-6 shadow-soft sm:p-10">

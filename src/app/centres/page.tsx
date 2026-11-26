@@ -8,15 +8,15 @@ import { extraPlaces, site } from "@/content/site";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Our Centres - Ahmedabad, Dehgam, Vadodara and Anand",
-  description: "HHC centres in Ahmedabad, Dehgam, Vadodara and Anand, Gujarat. Addresses and map links.",
+  title: "Our Centres - Ahmedabad and Dehgam",
+  description: "HHC centres in Ahmedabad and Dehgam, Gujarat. Addresses and map links.",
   path: "/centres",
 });
 
 export default function CentresPage() {
   return (
     <>
-      <PageHero eyebrow={<T>Our centres</T>} title={<T>Where to find HHC.</T>} lead={<T>HHC centres are located in Ahmedabad, Dehgam, Vadodara and Anand. Please call before visiting.</T>} crumbs={[{ label: <T>Our Centres</T> }]} />
+      <PageHero eyebrow={<T>Our centres</T>} title={<T>Where to find HHC.</T>} lead={<T>HHC centres in Ahmedabad and Dehgam. Please call before visiting.</T>} crumbs={[{ label: <T>Our Centres</T> }]} />
       <Section tone="white" labelledBy="map-title">
         <h2 id="map-title" className="mb-8 text-3xl sm:text-4xl"><T>Find us on the map</T></h2>
         <CentreMap />

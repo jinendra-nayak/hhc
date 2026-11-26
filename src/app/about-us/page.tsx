@@ -14,7 +14,7 @@ export const metadata = buildMetadata({
 });
 
 const more = [
-  { href: "/centres", t: "Our centres", d: "Addresses in Ahmedabad, Dehgam, Vadodara and Anand." },
+  { href: "/centres", t: "Our centres", d: "Addresses in Ahmedabad and Dehgam." },
   { href: "/media", t: "Media", d: "Posters and announcements published by HHC." },
 ];
 

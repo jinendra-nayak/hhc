@@ -37,7 +37,7 @@ test.describe("video hub", () => {
 
   test("home page has a compact video player too", async ({ page }) => {
     await page.goto("/");
-    await expect(page.getByRole("heading", { name: "Watch and learn." })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Watch, learn and stay informed." })).toBeVisible();
     await expect(page.getByRole("complementary", { name: "Playlist" }).getByRole("button")).toHaveCount(4);
   });
 });

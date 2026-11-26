@@ -1,28 +1,33 @@
+"use client";
+import { useSyncExternalStore } from "react";
 import { gu } from "@/content/gu";
 
+type Lang = "en" | "gu";
+
+function subscribe(cb: () => void) {
+  const mo = new MutationObserver(cb);
+  mo.observe(document.documentElement, { attributes: true, attributeFilter: ["data-lang"] });
+  return () => mo.disconnect();
+}
+const getSnapshot = (): Lang => (document.documentElement.dataset.lang === "gu" ? "gu" : "en");
+const getServerSnapshot = (): Lang => "en";
+
 /**
- * Bilingual text. Renders the English string and its Gujarati translation side by side;
- * CSS (`html[data-lang]`) shows only the language the visitor picked, so pages stay fully
- * static, fast and readable without JavaScript. Missing translations fall back to English.
- * Keep the children a single plain string - it is the dictionary key (src/content/gu.ts).
+ * Bilingual text. Renders only the active language (`html[data-lang]`) so DOM text
+ * extractors, screen readers, and browsers never see English and Gujarati concatenated.
+ * Missing translations fall back to English with `data-l-missing`.
  */
 export function T({ children }: { children: string }) {
+  const lang = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const g = gu[children];
   if (!g) return <span data-l-missing="">{children}</span>;
-  return (
-    <>
-      <span data-l="en">{children}</span>
-      <span data-l="gu" lang="gu">{g}</span>
-    </>
-  );
+  if (lang === "gu") return <span lang="gu">{g}</span>;
+  return <>{children}</>;
 }
 
 /** Explicit pair, for text that contains variables (not in the dictionary). */
 export function L({ en, gu: g }: { en: string; gu: string }) {
-  return (
-    <>
-      <span data-l="en">{en}</span>
-      <span data-l="gu" lang="gu">{g}</span>
-    </>
-  );
+  const lang = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  if (lang === "gu") return <span lang="gu">{g}</span>;
+  return <>{en}</>;
 }
