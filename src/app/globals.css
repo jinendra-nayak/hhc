@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+/* ---------- HHC design tokens ----------
+   Palette follows the brief; the logo's own orange and brown are kept as accents
+   (the logo itself is never recoloured). */
+@theme {
+  --color-forest: #173f35;
+  --color-deep: #244e40;
+  --color-sage: #477a61;
+  --color-sage-light: #dde9d9;
+  --color-cream: #f7f5ef;
+  --color-ink: #202b25;
+  --color-muted: #5a665e; /* slightly darker than #68736C so it passes AA on cream */
+  --color-line: #e6e9e3;
+  --color-accent: #f08a24; /* HHC logo orange — kept as a token only; the interface itself uses green + white */
+  --color-brand-brown: #8f4a22; /* darkened from logo lettering for readable text */
+
+  --font-heading: var(--font-lora), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --shadow-soft: 0 1px 2px rgb(23 63 53 / 0.06), 0 8px 24px -12px rgb(23 63 53 / 0.18);
+  --radius-card: 20px;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  /* One motion scale for the whole site: 150 ms micro-interactions, 200 ms UI state, 300 ms panels, 500 ms reveals */
+  --dur-fast: 150ms;
+  --dur-base: 200ms;
+  --dur-panel: 300ms;
+  --dur-reveal: 500ms;
+}
+
+@layer base {
+  html {
+    /* NOTE: no global `scroll-behavior: smooth`. Next.js 16 no longer overrides it during route changes,
+       so it made every menu click glide slowly to the top of the next page. */
+    scroll-padding-top: 6.5rem; /* anchors clear the floating header */
+    -webkit-text-size-adjust: 100%;
+  }
+  /* Large monitors: everything is rem-based, so scaling the root size scales type, spacing and the page width together */
+  @media (min-width: 1920px) { html { font-size: 112.5%; } }
+  @media (min-width: 2400px) { html { font-size: 137.5%; } }
+  @media (min-width: 3200px) { html { font-size: 175%; } }
+  body {
+    background: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    overflow-x: clip;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
+    color: var(--color-forest);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  :lang(gu) { font-family: "Noto Sans Gujarati", "Nirmala UI", "Shruti", "Gujarati Sangam MN", var(--font-body); line-height: 1.85; }
+  :lang(hi) { font-family: "Noto Sans Devanagari", "Nirmala UI", "Mangal", "Devanagari Sangam MN", var(--font-body); line-height: 1.85; }
+  :focus-visible {
+    outline: 3px solid var(--color-sage);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  .bg-forest :focus-visible, header :focus-visible, footer :focus-visible { outline-color: #fff; }
+  ::selection { background: var(--color-sage-light); color: var(--color-forest); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .container-hhc { width: 100%; max-width: 76rem; margin-inline: auto; padding-inline: 1.25rem; }
+  @media (min-width: 768px) { .container-hhc { padding-inline: 2rem; } }
+  .section-y { padding-block: 3.5rem; }
+  @media (min-width: 1024px) { .section-y { padding-block: 5.5rem; } }
+  .eyebrow {
+    font-size: 0.8125rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--color-brand-brown);
+  }
+  .prose-hhc p { margin-block: 1em; max-width: 68ch; }
+  .prose-hhc a { color: var(--color-deep); text-decoration: underline; text-underline-offset: 3px; }
+}
+
+/* Above-the-fold entrance (text reveal ≈ 500 ms). CSS-only so it runs before hydration. */
+@keyframes hhc-rise {
+  from { opacity: 0; transform: translateY(var(--rise, 24px)); }
+  to { opacity: 1; transform: none; }
+}
+.hhc-rise { animation: hhc-rise 0.5s var(--ease-out-soft) both; }
+
+/* Liquid navbar tints: opaque brand green when docked at the bottom of small screens, soft glass inside the header bar on desktop */
+.nimbus-nav.hhc-liquid[data-tone="dark"] { --n-tint: rgba(23, 63, 53, 0.97); --n-fg: #fff; --n-fg-soft: rgba(255, 255, 255, 0.82); }
+@media (min-width: 1024px) {
+  .nimbus-nav.hhc-liquid[data-tone="dark"] { --n-tint: rgba(255, 255, 255, 0.07); }
+}
+
+/* ---- Navigation menu (Radix data-motion) ---- */
+@keyframes nm-in-start { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+@keyframes nm-in-end { from { opacity: 0; transform: translateX(14px); } to { opacity: 1; transform: none; } }
+@keyframes nm-out-start { from { opacity: 1; } to { opacity: 0; transform: translateX(-14px); } }
+@keyframes nm-out-end { from { opacity: 1; } to { opacity: 0; transform: translateX(14px); } }
+@keyframes nm-viewport-in { from { opacity: 0; transform: translateY(-6px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes nm-viewport-out { from { opacity: 1; } to { opacity: 0; transform: translateY(-6px) scale(0.98); } }
+.nm-content[data-motion="from-start"] { animation: nm-in-start var(--dur-panel) var(--ease-out-soft); }
+.nm-content[data-motion="from-end"] { animation: nm-in-end var(--dur-panel) var(--ease-out-soft); }
+.nm-content[data-motion="to-start"] { animation: nm-out-start var(--dur-base) ease; }
+.nm-content[data-motion="to-end"] { animation: nm-out-end var(--dur-base) ease; }
+.nm-viewport { transition: width var(--dur-panel) var(--ease-out-soft), height var(--dur-panel) var(--ease-out-soft); }
+.nm-viewport[data-state="open"] { animation: nm-viewport-in var(--dur-panel) var(--ease-out-soft); }
+.nm-viewport[data-state="closed"] { animation: nm-viewport-out var(--dur-fast) ease forwards; }
+
+/* ---- Sheet (mobile menu) ---- */
+@keyframes sheet-in { from { transform: translateX(100%); } to { transform: none; } }
+@keyframes sheet-out { from { transform: none; } to { transform: translateX(100%); } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes sheet-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes sheet-down { from { transform: none; } to { transform: translateY(100%); } }
+.sheet-content[data-side="bottom"][data-state="open"] { animation: sheet-up var(--dur-panel) var(--ease-out-soft); }
+.sheet-content[data-side="bottom"][data-state="closed"] { animation: sheet-down var(--dur-base) ease-in forwards; }
+.sheet-content[data-side="right"][data-state="open"] { animation: sheet-in var(--dur-panel) var(--ease-out-soft); }
+.sheet-content[data-side="right"][data-state="closed"] { animation: sheet-out var(--dur-base) ease-in forwards; }
+.sheet-overlay[data-state="open"] { animation: fade-in var(--dur-panel) ease; }
+.sheet-overlay[data-state="closed"] { animation: fade-out var(--dur-base) ease forwards; }
+
+/* ---- Navigation progress line ---- */
+@keyframes nav-run { from { width: 0; } to { width: 82%; } }
+@keyframes nav-finish { from { width: 82%; opacity: 1; } to { width: 100%; opacity: 0; } }
+.nav-progress-run { animation: nav-run 8s cubic-bezier(0.1, 0.8, 0.2, 1) forwards; }
+.nav-progress-done { animation: nav-finish 0.4s ease-out forwards; }
+
+/* ---- Accordion rows in the menu ---- */
+@keyframes acc-down { from { height: 0; } to { height: var(--radix-accordion-content-height); } }
+@keyframes acc-up { from { height: var(--radix-accordion-content-height); } to { height: 0; } }
+.acc-content[data-state="open"] { animation: acc-down var(--dur-panel) var(--ease-out-soft); }
+.acc-content[data-state="closed"] { animation: acc-up var(--dur-base) var(--ease-out-soft); }
+
+/* The provided liquid accordion's water is blue; shift it to the brand green so the palette stays consistent */
+.nimbus-faq .nf-water, .nimbus-faq .nf-pool, .nimbus-faq .nf-ico { filter: hue-rotate(-52deg) saturate(0.85); }
+
+/* ---- Language switching: both languages are in the HTML, the chosen one is shown ---- */
+html:not([data-lang="gu"]) [data-l="gu"],
+html[data-lang="gu"] [data-l="en"] { display: none !important; }
+
+/* Animated underline for text links */
+.link-sweep { background: linear-gradient(currentColor, currentColor) 0 100% / 0 1.5px no-repeat; transition: background-size var(--dur-panel) var(--ease-out-soft); }
+.link-sweep:hover, .link-sweep:focus-visible { background-size: 100% 1.5px; }
+
+.skip-link {
+  position: absolute; left: 1rem; top: -4rem; z-index: 100;
+  background: var(--color-forest); color: #fff; padding: .75rem 1rem; border-radius: 4px;
+}
+.skip-link:focus { top: 1rem; }
