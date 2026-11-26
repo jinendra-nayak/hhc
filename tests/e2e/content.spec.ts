@@ -65,6 +65,47 @@ test("hero image is full-screen and edge-to-edge; no image labels", async ({ pag
   await expect(page.getByText("Illustrative image")).toHaveCount(0);
 });
 
+for (const [w, h] of [[320, 568], [360, 740], [390, 844], [430, 932]] as const) {
+  test(`phone hero ${w}x${h}: sharp photo above the text, buttons clear of the tab bar, entrance finishes`, async ({ browser }) => {
+    const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 2 });
+    const page = await ctx.newPage();
+    await page.goto("/");
+    await page.waitForTimeout(2600);
+    const m = await page.evaluate(() => {
+      const s = document.querySelector("section[aria-labelledby=hero-title]")!;
+      const img = s.querySelector("img")!;
+      const fetched = Math.min(1366, Number(img.currentSrc.match(/[?&]w=(\d+)/)?.[1] ?? 0));
+      const drawn = Math.max(img.offsetWidth, (img.offsetHeight * 1366) / 877);
+      const buttons = [...s.querySelectorAll("a")].filter((a) => a.getClientRects().length).map((a) => a.getBoundingClientRect());
+      return {
+        sharpness: fetched / (drawn * devicePixelRatio),
+        photoBottom: img.parentElement!.getBoundingClientRect().bottom,
+        titleTop: s.querySelector("h1")!.getBoundingClientRect().top,
+        buttonsBottom: Math.max(...buttons.map((b) => b.bottom)),
+        sameRow: Math.abs(buttons[0].top - buttons[1].top) < 2,
+        barTop: document.querySelector("nav.fixed")!.getBoundingClientRect().top,
+        settled: [...s.querySelectorAll(".hero-word > span, .hero-photo")].every((e) => ["none", "matrix(1, 0, 0, 1, 0, 0)"].includes(getComputedStyle(e).transform)),
+      };
+    });
+    expect(m.sharpness, "image pixels per screen pixel").toBeGreaterThan(0.75);
+    expect(m.titleTop, "headline starts below the clear part of the photo").toBeGreaterThan(m.photoBottom - 45);
+    expect(m.buttonsBottom).toBeLessThanOrEqual(m.barTop);
+    expect(m.sameRow, "two buttons side by side").toBe(true);
+    expect(m.settled, "animation ends in the final position").toBe(true);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Health knowledge, carried to where people live.");
+    await ctx.close();
+  });
+}
+
+test("hero headline is visible at once when reduced motion is requested", async ({ browser }) => {
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, reducedMotion: "reduce" });
+  const page = await ctx.newPage();
+  await page.goto("/");
+  const names = await page.locator(".hero-word > span, .hero-photo, .hhc-rise").evaluateAll((els) => els.map((e) => getComputedStyle(e).animationName));
+  expect(new Set(names)).toEqual(new Set(["none"]));
+  await ctx.close();
+});
+
 test("home no longer shows the stats band", async ({ page }) => {
   await page.goto("/");
   await expect(page.getByText("What you can open on this site today")).toHaveCount(0);

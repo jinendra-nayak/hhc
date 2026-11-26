@@ -12,6 +12,11 @@ function subscribe(cb: () => void) {
 const getSnapshot = (): Lang => (document.documentElement.dataset.lang === "gu" ? "gu" : "en");
 const getServerSnapshot = (): Lang => "en";
 
+/** The visitor's current language, for components that need the string itself. */
+export function useLang(): Lang {
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
+
 /**
  * Bilingual text. Renders only the active language (`html[data-lang]`) so DOM text
  * extractors, screen readers, and browsers never see English and Gujarati concatenated.

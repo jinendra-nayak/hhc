@@ -40,9 +40,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning className={`${lora.variable} ${inter.variable}`}>
       <head>
-        {process.env.NODE_ENV === "development" ? <script dangerouslySetInnerHTML={{ __html: stripExtensionAttributes }} /> : null}
+        {process.env.NODE_ENV === "development" ? <script suppressHydrationWarning dangerouslySetInnerHTML={{ __html: stripExtensionAttributes }} /> : null}
         {/* apply the visitor's saved language before first paint (no flash) */}
-        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem("hhc-lang")==="gu"){var d=document.documentElement;d.dataset.lang="gu";d.lang="gu"}}catch(e){}` }} />
+        {/* suppressHydrationWarning: extensions inject their own <script> into <head>, which React would otherwise compare with ours */}
+        <script suppressHydrationWarning dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem("hhc-lang")==="gu"){var d=document.documentElement;d.dataset.lang="gu";d.lang="gu"}}catch(e){}` }} />
         {/* If JavaScript fails, scroll-reveal content must still be readable. */}
         <noscript>
           <style>{`[style*="opacity: 0"],[style*="opacity:0"],[style*="translateY(-100%)"],[style*="translateY(100%)"]{opacity:1!important;transform:none!important;clip-path:none!important}`}</style>

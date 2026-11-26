@@ -92,6 +92,18 @@
 }
 .hhc-rise { animation: hhc-rise 0.5s var(--ease-out-soft) both; }
 
+/* Hero entrance (CSS only: runs before hydration, transform/opacity only so it stays smooth on phones).
+   The photo settles from a gentle zoom while the headline rises word by word, then the text and buttons follow. */
+@keyframes hhc-settle { from { transform: scale(1.14); } to { transform: scale(1); } }
+@keyframes hhc-word { from { transform: translateY(108%); } to { transform: none; } }
+.hero-photo { animation: hhc-settle 2.4s cubic-bezier(0.25, 0.4, 0.25, 1) both; will-change: transform; }
+.hero-word { display: inline-block; overflow: hidden; vertical-align: top; padding-block: 0.06em 0.12em; margin-block: -0.06em -0.12em; }
+.hero-word > span { display: inline-block; animation: hhc-word 0.75s cubic-bezier(0.22, 1, 0.36, 1) both; }
+h1[lang="gu"], h1[lang="gu"] span { line-height: 1.32; } /* Gujarati headline: tighter than body text */
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo, .hero-word > span, .hhc-rise { animation: none !important; }
+}
+
 /* Liquid navbar tints: opaque brand green when docked at the bottom of small screens, soft glass inside the header bar on desktop */
 .nimbus-nav.hhc-liquid[data-tone="dark"] { --n-tint: rgba(23, 63, 53, 0.97); --n-fg: #fff; --n-fg-soft: rgba(255, 255, 255, 0.82); }
 @media (min-width: 1024px) {
@@ -155,3 +167,36 @@ html[data-lang="gu"] [data-l="en"] { display: none !important; }
   background: var(--color-forest); color: #fff; padding: .75rem 1rem; border-radius: 4px;
 }
 .skip-link:focus { top: 1rem; }
+
+/* ============ Phone / tablet polish (mobile audit) ============ */
+/* Gujarati and Devanagari headings: tighter than body text. Uppercase tracking breaks Gujarati letter clusters. */
+:is(h1, h2, h3, h4):lang(gu), :is(h1, h2, h3, h4) :lang(gu) { line-height: 1.38; }
+html[data-lang="gu"] .eyebrow, .eyebrow:lang(gu), .eyebrow :lang(gu), footer h2 :lang(gu) { letter-spacing: 0; }
+@media (max-width: 639px) {
+  .section-y { padding-block: 2.75rem; }
+  html[data-lang="gu"] main section:not([aria-labelledby="hero-title"]) h2 { font-size: 1.5rem; }
+  html[data-lang="gu"] main > header h1, html[data-lang="gu"] main header h1 { font-size: 1.625rem; }
+}
+/* the accordion component ships its own system font and small sizes: use the site's type */
+.nimbus-faq.nimbus-faq { font-family: var(--font-body); }
+@media (max-width: 639px) {
+  .nimbus-faq.nimbus-faq .nf-q { font-size: 1rem; }
+  .nimbus-faq.nimbus-faq .nf-a { font-size: 0.9375rem; }
+}
+a[aria-label="Human Health Circle - home"] { min-width: 44px; min-height: 44px; justify-content: center; }
+@media (max-width: 1023px) {
+  /* skip layout and paint of sections that are far off screen */
+  .home-sections > * { content-visibility: auto; contain-intrinsic-size: auto 900px; }
+}
+/* subtle heading reveal as it scrolls in (browsers without scroll timelines simply show it) */
+@supports (animation-timeline: view()) {
+  @media (max-width: 1023px) and (prefers-reduced-motion: no-preference) {
+    .hhc-reveal { animation: hhc-reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 55%; }
+  }
+}
+@keyframes hhc-reveal { from { transform: translateY(22px); } to { transform: none; } } /* movement only: fading text fails contrast */
+@media (max-width: 1023px) {
+  /* stand-alone text links get a full-height tap area (links inside sentences are left alone) */
+  .link-sweep, main a.inline-flex.font-semibold.text-deep, main p > a:only-child.underline, main li a.font-semibold.text-forest { min-height: 44px; display: inline-flex; align-items: center; }
+  nav[aria-label="Breadcrumb"] a { min-width: 44px; }
+}

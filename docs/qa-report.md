@@ -5,7 +5,7 @@ Everything below was actually run. Items under "Not tested" were not.
 
 ## 1. Automated end-to-end suite - `npx playwright test`
 
-**131 tests, 131 passed** (final run, after the tab-bar redesign round; `npx eslint .` also clean; the suite was run repeatedly during development and three earlier runs surfaced real failures that were fixed - see §5). Raw output: `tests/results.json` (git-ignored; regenerate by running the suite).
+**136 tests, 136 passed** (final run, after the mobile hero round; `npx eslint .` also clean; the suite was run repeatedly during development and three earlier runs surfaced real failures that were fixed - see §5). Raw output: `tests/results.json` (git-ignored; regenerate by running the suite).
 
 | Area | Tests | What is asserted |
 |---|---|---|
@@ -124,3 +124,11 @@ Visually verified at 1440 and 390 px (footer, hero, systems section). Lighthouse
 **Menu panel redesigned:** "Menu" title, featured Packages card, grouped single-column lists (Discover, Our Work, Innovations, Resources) with icon, label, two-line description, current page marked with a check; Contact, language, phone and email pinned at the bottom.
 **Tests (131):** every tab labelled and un-clipped at 375 / 412 / 430 / 768 px, equal widths, instant highlight under a delayed network, progress line appears and disappears, full menu contents, lens position, keyboard, Gujarati menu. **Defects found and fixed:** "Resources" truncated at 375 px; Home row used an external-link icon; descriptions cut to one line.
 **Not tested:** real phones (viewport/touch emulation only), iOS Safari rendering of the backdrop blur.
+
+## 16. Mobile hero rebuild; dev hydration guard (latest round)
+- **Dev hydration error** (browser extension attributes): development-only guard in `layout.tsx`. Verified on the dev server with simulated extension attributes: guard off = error on all 8 page/language cases, guard on = 0 errors. Not present in production HTML.
+- **Mobile hero, root causes:** a 1366×877 landscape photo covering a tall screen showed a narrow slice, enlarged ~2.5× (about 0.4–0.5 image pixels per screen pixel) = blurry; a full-height green wash covered the people; wrapped eyebrow, 5-line paragraph and stacked buttons ran under the tab bar on short screens; no entrance animation.
+- **Fix (below 1024 px portrait):** clear photo on top fading into a solid green text panel, shorter summary (hidden under 620 px height), two buttons side by side. CSS-only entrance: photo settles from zoom, headline rises word by word, text and buttons follow; disabled for reduced motion. Desktop layout unchanged (same entrance animation added).
+- Checked 320×568 to 1440×900, English and Gujarati, and landscape 844×390 (emulation only).
+- **Performance trade-off (measured, not resolved):** mobile Lighthouse simulated score fell. Same session: old hero 93–95 (simulated LCP 1.0–1.1 s), new hero 79–85 (3.5–4.1 s); final runs on a loaded machine 78–89. Cause: the old full-screen image was not counted as "largest contentful paint" (the headline was); the photo now is. Removing animation, lighter image, sync decode and no font preload did not restore the score. With applied throttling LCP was 1.9–2.4 s; desktop 100; CLS 0; accessibility 100.
+- The photo is still the unverified illustrative placeholder, and only 1366 px wide: soft on large high-density screens.

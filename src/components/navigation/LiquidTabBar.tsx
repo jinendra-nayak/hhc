@@ -89,7 +89,7 @@ export function LiquidTabBar() {
   const itemClass = (on: boolean, prominent?: boolean) =>
     cn(
       "relative flex h-14 w-full flex-col items-center justify-end gap-0.5 rounded-[1.4rem] pb-1.5 outline-none transition-colors duration-200 focus-visible:ring-2 focus-visible:ring-white",
-      on ? "text-white" : "text-white/80 active:text-white",
+      on ? "text-white" : "text-white/90 active:text-white",
       prominent && "text-white",
     );
 
@@ -111,7 +111,7 @@ export function LiquidTabBar() {
       <nav aria-label="Main" className="fixed inset-x-0 bottom-0 z-40 px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] lg:hidden">
         <div className="relative mx-auto max-w-lg md:max-w-2xl">
           {/* glass surface: blur + saturation, specular edges (symmetric) */}
-          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem] bg-forest/85 shadow-[0_18px_40px_-12px_rgba(0,0,0,0.55)] ring-1 ring-white/25 backdrop-blur-xl backdrop-saturate-150">
+          <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem] bg-forest/[0.94] shadow-[0_18px_40px_-12px_rgba(0,0,0,0.55)] ring-1 ring-white/25 backdrop-blur-xl backdrop-saturate-150">
             <span className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
             <span className="absolute inset-x-8 bottom-0 h-px bg-gradient-to-r from-transparent via-white/35 to-transparent" />
             <span className="absolute inset-y-3 left-0 w-px bg-gradient-to-b from-transparent via-white/50 to-transparent" />

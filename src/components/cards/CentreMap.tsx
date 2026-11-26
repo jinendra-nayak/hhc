@@ -18,7 +18,7 @@ export function CentreMap() {
 
   return (
     <div className="grid gap-4 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)]">
-      <div role="group" aria-label="Choose a place" className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible lg:pb-0">
+      <div role="group" aria-label="Choose a place" className="flex flex-col gap-2">
         {mapPlaces.map((p) => {
           const on = p.id === id;
           return (
@@ -28,7 +28,7 @@ export function CentreMap() {
               aria-pressed={on}
               onClick={() => setId(p.id)}
               className={cn(
-                "min-w-[15rem] shrink-0 rounded-2xl border p-4 text-left transition-colors duration-150 lg:min-w-0",
+                "rounded-2xl border p-4 text-left transition-colors duration-150",
                 on ? "border-forest bg-forest text-white shadow-soft" : "border-line bg-white text-ink hover:border-forest/40",
               )}
             >
@@ -53,7 +53,7 @@ export function CentreMap() {
         />
         <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line p-4 lg:absolute lg:inset-x-4 lg:bottom-4 lg:rounded-2xl lg:border-0 lg:bg-white/95 lg:shadow-soft">
           <div className="min-w-0">
-            <p className="truncate font-semibold text-forest"><T>{place.name}</T></p>
+            <p className="font-semibold leading-snug text-forest"><T>{place.name}</T></p>
             <p className="text-sm text-muted"><T>Map position is approximate — please call before visiting.</T></p>
           </div>
           <div className="flex flex-wrap gap-2">

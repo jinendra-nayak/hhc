@@ -448,5 +448,7 @@ export const gu: Record<string, string> = {
  "Free to ₹5,000 a year": "મફતથી વર્ષે ₹5,000 સુધી",
  "Menu": "મેનુ",
  "Discover": "શોધો",
- "Start here": "અહીંથી શરૂ કરો"
+ "Start here": "અહીંથી શરૂ કરો",
+ "Human Health Circle": "હ્યુમન હેલ્થ સર્કલ",
+ "Community training, health-education material and doorstep medical camps.": "સમુદાય તાલીમ, આરોગ્ય શિક્ષણ સામગ્રી અને ઘરઆંગણે મેડિકલ કેમ્પ."
 };

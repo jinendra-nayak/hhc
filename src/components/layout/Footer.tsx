@@ -29,7 +29,7 @@ export function Footer() {
   return (
     <footer className="mt-4 rounded-t-[2rem] bg-forest text-white/80">
       <div className="container-hhc pb-28 pt-8 lg:pb-8 lg:pt-10">
-        <div className="grid gap-8 rounded-3xl border border-white/10 bg-white/[0.04] p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-14 lg:p-10">
+        <div className="grid gap-8 rounded-3xl border border-white/10 bg-white/[0.04] p-5 sm:p-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] lg:gap-14 lg:p-10">
           <div>
             <div className="flex items-center gap-4">
               {/* original logo on a round white badge so the multicolour artwork is shown unaltered */}
@@ -42,20 +42,20 @@ export function Footer() {
               <a href={`tel:${site.phone.tel}`} className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 text-[0.95rem] font-semibold text-forest transition-colors duration-150 hover:bg-sage-light">
                 <Phone className="size-4 shrink-0" aria-hidden /> {site.phone.display}
               </a>
-              <a href={`mailto:${site.email}`} className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-white/25 px-3.5 py-2 text-[0.8125rem] font-medium text-white transition-colors duration-150 hover:bg-white/10 sm:px-4 sm:text-[0.95rem]">
+              <a href={`mailto:${site.email}`} className="inline-flex min-h-11 max-w-full items-center gap-2 rounded-full border border-white/25 px-3.5 py-2 text-sm font-medium text-white transition-colors duration-150 hover:bg-white/10 sm:px-4 sm:text-[0.95rem]">
                 <Mail className="size-4 shrink-0" aria-hidden /> <span className="break-words">{site.email}</span>
               </a>
             </div>
           </div>
 
-          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3">
-            {Object.entries(footerLinks).map(([heading, links]) => (
-              <div key={heading}>
+          <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-6 sm:grid-cols-3 sm:gap-y-8">
+            {Object.entries(footerLinks).map(([heading, links], column) => (
+              <div key={heading} className={column === 2 ? "max-sm:col-span-2" : undefined}>
                 <h2 className="mb-3 font-body text-[0.8125rem] font-semibold uppercase tracking-[0.14em] !text-white/70"><T>{heading}</T></h2>
-                <ul className="space-y-1">
+                <ul className={column === 2 ? "max-sm:grid max-sm:grid-cols-2 max-sm:gap-x-6 sm:space-y-1" : "sm:space-y-1"}>
                   {links.map((l) => (
                     <li key={l.href}>
-                      <Link href={l.href} className="group inline-flex items-center gap-1 py-1 text-[0.95rem] transition-colors duration-150 hover:text-white">
+                      <Link href={l.href} className="group inline-flex min-h-11 items-center gap-1 text-[0.95rem] leading-snug sm:min-h-0 sm:py-1 transition-colors duration-150 hover:text-white">
                         <T>{l.label}</T>
                         <ArrowUpRight aria-hidden className="size-3.5 -translate-x-1 opacity-0 transition-all duration-150 group-hover:translate-x-0 group-hover:opacity-100" />
                       </Link>

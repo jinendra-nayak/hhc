@@ -31,7 +31,7 @@ export function LanguageSwitch({ className, tone = "dark" }: { className?: strin
       aria-pressed={lang === l}
       onClick={() => setLanguage(l)}
       className={cn(
-        "min-h-9 rounded-full px-3 text-sm font-semibold transition-colors duration-150",
+        "min-h-11 min-w-11 rounded-full px-3 text-sm font-semibold transition-colors duration-150",
         tone === "dark"
           ? lang === l ? "bg-white text-forest" : "text-white/80 hover:text-white"
           : lang === l ? "bg-forest text-white" : "text-forest/80 hover:text-forest",

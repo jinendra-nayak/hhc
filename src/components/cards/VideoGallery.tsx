@@ -33,7 +33,7 @@ export function VideoGallery({ compact = false, headingLevel = 3 }: { compact?: 
   return (
     <div>
       {!compact && (
-        <div role="group" aria-label="Filter videos by topic" className="mb-6 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filter videos by topic" className="mb-6 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {(["All", ...videoTopics] as Topic[]).map((t) => (
             <button
               key={t}
@@ -41,7 +41,7 @@ export function VideoGallery({ compact = false, headingLevel = 3 }: { compact?: 
               aria-pressed={topic === t}
               onClick={() => choose(t)}
               className={cn(
-                "min-h-11 rounded-full border px-5 text-sm font-semibold transition-colors duration-150",
+                "min-h-11 rounded-full border px-3 py-1.5 text-sm font-semibold leading-snug sm:px-5 transition-colors duration-150",
                 topic === t ? "border-forest bg-forest text-white" : "border-forest/25 bg-white text-forest hover:border-forest",
               )}
             >

@@ -27,7 +27,7 @@ export default function RushiKrushiPage() {
           <p><strong><T>Schedule:</T></strong> <T>1 May to 31 October 2023 (six months), with one or two online sessions each week. Each participant was to receive a certificate from International Hindu University at the end of the course.</T></p>
           <p className="text-sm"><T>This is an English summary of the original Hindi course page. The original text is available from HHC on request.</T></p>
         </article>
-        <p className="mt-8"><Link className="font-semibold text-deep underline underline-offset-4" href="/rushi-krushi-list-of-faculties"><T>View the list of faculty</T> →</Link></p>
+        <p className="mt-8"><Link className="inline-flex min-h-11 items-center gap-1 font-semibold text-deep underline underline-offset-4" href="/rushi-krushi-list-of-faculties"><T>View the list of faculty</T> →</Link></p>
       </Section>
     </>
   );

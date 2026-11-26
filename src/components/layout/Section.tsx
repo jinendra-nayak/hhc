@@ -42,12 +42,12 @@ export function SectionHeading({
   light?: boolean;
 }) {
   return (
-    <div className={cn("max-w-2xl", className)}>
-      {eyebrow ? <p className={cn("eyebrow mb-4", light && "!text-white/80")}>{eyebrow}</p> : null}
-      <h2 id={id} className="text-[2rem] sm:text-4xl lg:text-[2.7rem]">
+    <div className={cn("hhc-reveal max-w-2xl", className)}>
+      {eyebrow ? <p className={cn("eyebrow mb-3 sm:mb-4", light && "!text-white/80")}>{eyebrow}</p> : null}
+      <h2 id={id} className="text-[1.75rem] sm:text-4xl lg:text-[2.7rem]">
         {title}
       </h2>
-      {children ? <div className={cn("mt-5 text-lg", light ? "text-white/80" : "text-muted")}>{children}</div> : null}
+      {children ? <div className={cn("mt-4 text-[1.0625rem] sm:mt-5 sm:text-lg", light ? "text-white/80" : "text-muted")}>{children}</div> : null}
     </div>
   );
 }

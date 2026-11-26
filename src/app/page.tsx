@@ -25,15 +25,17 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <Intro />
-      <Approach />
-      <SystemsOfCare />
-      <Camps />
-      <People />
-      <CentresPreview />
-      <BvdFeature />
-      <ResourcesPreview />
-      <ContactCta />
+      <div className="home-sections">
+        <Intro />
+        <Approach />
+        <SystemsOfCare />
+        <Camps />
+        <People />
+        <CentresPreview />
+        <BvdFeature />
+        <ResourcesPreview />
+        <ContactCta />
+      </div>
     </>
   );
 }

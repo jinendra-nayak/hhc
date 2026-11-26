@@ -37,10 +37,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# internal notes (README.md stays in the repository)
+/docs/*.md
+/CLAUDE.md
 
-
-
-outdated-link.txt
 # typescript
 *.tsbuildinfo
 next-env.d.ts
