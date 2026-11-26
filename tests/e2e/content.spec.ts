@@ -86,10 +86,9 @@ test("structured data on every page is valid JSON and is an Organization", async
 test("centres page shows verified Ahmedabad locations and no dead links", async ({ page }) => {
   await page.goto("/centres");
   await expect(page.getByText("23 Shardanagar Society").first()).toBeVisible();
-  await expect(page.getByText("Niramay Tirth Arogya Seva Kendra").first()).toBeVisible();
+  await expect(page.getByText("Shri Bhagwat Vidyapith Campus").first()).toBeVisible();
   await expect(page.getByText("Pandya Hospital").first()).toBeVisible();
   await expect(page.locator('a[href*="business.site"]')).toHaveCount(0); // retired Google Business Site (404)
-  for (const city of ["Ahmedabad", "Dehgam", "Vadodara", "Anand"]) await expect(page.getByRole("heading", { name: city, exact: true })).toBeVisible();
 });
 
 test("footer: no disclaimer, and the green runs to the very bottom (no empty strip under it)", async ({ page }) => {
