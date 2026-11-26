@@ -17,7 +17,7 @@ export function Intro() {
           <p>
             <T>Human Health Circle works in coordination with many organisations on health and development issues. Our team brings experience across community health, hospitals and medical care, agriculture, medicinal plants and food production.</T>
           </p>
-          <p>
+          <p className="hidden md:block">
             <T>Most of what we do is simple and practical: training people to look after their own and their neighbours’ health, in a language and style they already understand.</T>
           </p>
         </FadeIn>

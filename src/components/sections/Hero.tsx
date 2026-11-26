@@ -25,21 +25,21 @@ export function Hero() {
         fetchPriority="high"
         quality={60}
         sizes="(max-width: 640px) 420px, 100vw"
-        className="-z-10 object-cover object-[60%_center]"
+        className="-z-10 object-cover object-[54%_35%] sm:object-[58%_38%] lg:object-[60%_center]"
       />
-      {/* lighter on the right so the photograph stays visible; dark on the left/bottom behind the text */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-forest/90 via-forest/45 to-forest/10 lg:bg-gradient-to-r lg:from-forest/85 lg:via-forest/40 lg:to-transparent" />
+      {/* lighter on the right so the photograph stays visible; stronger botanical green gradient on mobile for white-text readability */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-t from-forest/95 via-forest/75 via-55% to-forest/35 lg:bg-gradient-to-r lg:from-forest/85 lg:via-forest/40 lg:via-50% lg:to-transparent" />
 
-      <div className="container-hhc grid items-end gap-10 pb-28 pt-32 lg:grid-cols-[1.4fr_1fr] lg:pb-16">
+      <div className="container-hhc grid items-end gap-10 pb-32 pt-28 sm:pt-32 lg:grid-cols-[1.4fr_1fr] lg:pb-16">
         <div>
-          <p className="eyebrow mb-4 !text-white/85"><T>Human Health Circle · Gujarat, India</T></p>
-          <h1 id="hero-title" className="max-w-3xl text-[clamp(2.4rem,7vw,4.9rem)] !leading-[1.03] !text-white">
+          <p className="eyebrow mb-3 !text-white/90 sm:mb-4 lg:!text-white/85"><T>Human Health Circle · Gujarat, India</T></p>
+          <h1 id="hero-title" className="max-w-3xl text-[clamp(2.15rem,8vw,4.9rem)] !leading-[1.12] !text-white lg:!leading-[1.03]">
             <T>Health knowledge, carried to where people live.</T>
           </h1>
-          <p className="mt-5 max-w-xl text-base text-white/90 sm:text-lg">
+          <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-white/95 sm:mt-5 sm:text-lg lg:text-white/90">
             <T>HHC trains communities, prepares health-education material and holds medical camps at the doorstep - drawing on Ayurveda, Naturopathy, Allopathy, Homeopathy and Yoga.</T>
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3 sm:mt-7">
             <Button asChild size="lg" variant="white"><Link href="/about-us"><T>Learn about us</T> <ArrowRight aria-hidden /></Link></Button>
             <Button asChild size="lg" variant="outline-light"><Link href="/initiatives"><T>Our initiatives</T></Link></Button>
             <Link href="/contact" className="link-sweep px-2 py-3 font-semibold text-white"><T>Contact us</T></Link>
